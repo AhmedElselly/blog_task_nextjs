@@ -1,0 +1,22 @@
+.container {
+    padding: 50px;
+    padding-top: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.imageContainer {
+    width: 70vw;
+    
+}
+
+.image {
+    width: 100%;
+}
+
+.title {
+    color: #fff;
+    align-self: flex-start;
+}

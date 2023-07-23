@@ -1,0 +1,12 @@
+.container {
+    width: 100%;
+    height: 95vh;
+    background-image: linear-gradient(to top, rgba(20, 32, 48, .2), rgba(20, 32, 48, .2)), url(https://images.unsplash.com/photo-1578238808621-0acaebe86b91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80);
+    background-size: 100% 95vh;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
