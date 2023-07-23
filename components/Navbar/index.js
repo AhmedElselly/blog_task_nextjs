@@ -76,6 +76,12 @@ function Navbar() {
         >
           Login
         </Link>}
+        {!isAuth && <Link
+          className={`${styles.link} ${asPath === "/" && styles.active}`}
+          href="/register"
+        >
+          Signup
+        </Link>}
         
         {isAuth && <div
           className={`${styles.link} ${asPath === "/" && styles.active}`}
