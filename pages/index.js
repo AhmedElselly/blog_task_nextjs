@@ -14,7 +14,7 @@ export default function Home({ posts }) {
   const generatePosts = () => {
     return posts?.map((post) => {
       return (
-        <Col key={post._id} sm={12} md={4} lg={4}>
+        <Col key={post._id} sm={12} md={6} lg={4}>
           <Card post={post} />
         </Col>
       );

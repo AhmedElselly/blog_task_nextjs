@@ -5,15 +5,17 @@ import React, { Fragment } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 
 const Posts = ({ posts }) => {
+	// display posts
   const generatePosts = () => {
     return posts?.map((post) => {
       return (
-        <Col sm={12} md={4} lg={4}>
+        <Col sm={12} md={6} lg={4}>
           <Card post={post} />
         </Col>
       );
     });
   };
+
   return (
     <Fragment>
       <Head>

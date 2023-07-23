@@ -1,14 +1,25 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import styles from "@/styles/PostShow.module.css";
-import { show } from "@/actions/postsApi";
+import { remove, show } from "@/actions/postsApi";
 import { url } from "@/actions/baseUrl";
 import { Button } from "react-bootstrap";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import ModalCom from "@/components/ModalCom";
 
 const PostShow = ({ post }) => {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
 
+  const handleRemove = () => {
+    remove(post._id).then((res) => {
+      router.push("/posts");
+    });
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <Fragment>
       <Head>
@@ -31,12 +42,22 @@ const PostShow = ({ post }) => {
           <Button onClick={() => router.push(`/posts/${post._id}/edit`)}>
             Edit
           </Button>
+          <Button onClick={() => setOpen(true)} variant="secondary">
+            Remove
+          </Button>
         </div>
         <div
           className={styles.title}
           dangerouslySetInnerHTML={{ __html: post.body }}
         ></div>
       </div>
+      <ModalCom
+        open={open}
+        title={`Remove ${post.title}`}
+        text={`Are you sure to remove ${post.title}?`}
+        approve={handleRemove}
+        refuse={handleClose}
+      />
     </Fragment>
   );
 };
