@@ -10,12 +10,14 @@ export const show = async (postId) => {
 	return res;
 }
 
-export const create = async (values) => {
+export const create = async (values, token) => {
+	api.defaults.headers = {Authorization: `Bearer ${token}`};
 	const res = await api.post('/posts/create', values);
 	return res;
 }
 
 export const update = async (values, postId) => {
+	api.defaults.headers = {Authorization: `Bearer ${token}`};
 	const res = await api.put(`/posts/${postId}`, values);
 	return res;
 }

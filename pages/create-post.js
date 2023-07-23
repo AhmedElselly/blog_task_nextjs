@@ -6,6 +6,7 @@ import { Button } from "react-bootstrap";
 import { create } from "@/actions/postsApi";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { isAuthenticated } from "@/actions/userApi";
 
 const Editor = dynamic(() => import("@/components/Editor"), {
   ssr: false,
@@ -41,8 +42,9 @@ const Create = () => {
     formData.append("title", title);
     formData.append("body", body);
     formData.append("image", image);
-    create(formData).then((res) => {
-      router.push(`/posts/${post._id}`);
+    const {token} = isAuthenticated();
+    create(formData, token).then((res) => {
+      router.push(`/posts`);
     });
   };
   return (

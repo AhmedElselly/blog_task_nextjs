@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import styles from "@/styles/PostShow.module.css";
 import { remove, show } from "@/actions/postsApi";
 import { url } from "@/actions/baseUrl";
@@ -6,10 +6,21 @@ import { Button } from "react-bootstrap";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import ModalCom from "@/components/ModalCom";
+import { isAuthenticated } from "@/actions/userApi";
 
 const PostShow = ({ post }) => {
+  console.log(post)
   const router = useRouter();
+  const [isAuth, setIsAuth] = useState(false);
+  const [user, setUser] = useState(null);
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      setIsAuth(true);
+      setUser(isAuthenticated().user);
+    }
+  }, []);
 
   const handleRemove = () => {
     remove(post._id).then((res) => {
@@ -39,12 +50,16 @@ const PostShow = ({ post }) => {
         </div>
         <div className={`d-flex gap-4 mt-4`}>
           <h3 className={styles.title}>{post.title}</h3>
-          <Button onClick={() => router.push(`/posts/${post._id}/edit`)}>
-            Edit
-          </Button>
-          <Button onClick={() => setOpen(true)} variant="secondary">
-            Remove
-          </Button>
+          {isAuth && post.author._id === user._id && (
+            <Fragment>
+              <Button onClick={() => router.push(`/posts/${post._id}/edit`)}>
+                Edit
+              </Button>
+              <Button onClick={() => setOpen(true)} variant="secondary">
+                Remove
+              </Button>
+            </Fragment>
+          )}
         </div>
         <div
           className={styles.title}
